@@ -60,11 +60,25 @@ Base URL: `http://localhost:3001/api/v1`
 
 ## What "completed" means in my game
 
-[One or two sentences: when does a player count as having completed a game? For example: "A player completed the game when they answered every question, even if some answers were wrong or timed out."]
+A player is considered to have completed a game when the game session is closed and the player has finished answering all required questions. The player's score does not affect completion, so incorrect answers do not automatically make the player incomplete.
 
 ## Tables
 
-[List your tables, one line each, in the order of your migrations.]
+1.users — Stores user account information, including the user's school ID.
+
+2.QuestionSet — Stores question sets created for quiz games.
+
+3.GameSession — Stores game sessions, including the join code, status, start time, and end time.
+
+4.Player — Stores players who join a game session.
+
+5.Question — Stores the questions used in a question set.
+
+6.Answer — Stores players' answers to quiz questions.
+
+7.RewardRound — Stores reward-round information associated with players and the game.
+
+8.RewardObject — Stores reward objects used in the reward round, including their types and chakra changes.
 
 ## Database scripts
 
