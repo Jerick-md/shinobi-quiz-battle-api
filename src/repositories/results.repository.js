@@ -31,8 +31,48 @@ const { sequelize } = require('../models');
 
 async function findFinishedGamePlayers(since) {
   const sql = `
-    SELECT NULL AS session_code
-     WHERE FALSE
+    SELECT
+      gs."sessionId" AS session_id,
+      gs."joinCode" AS session_code,
+      gs."startTime" AS started_at,
+      gs."endTime" AS ended_at,
+      u.school_id,
+      p.nickname,
+      p.chakra AS score,
+      (
+        COUNT(DISTINCT a."questionId") >= (
+          SELECT COUNT(*)
+          FROM "Question" q
+          WHERE q."questionSetId" = gs."questionSetId"
+        )
+      ) AS completed
+    FROM "GameSession" gs
+    JOIN "Player" p
+      ON p."sessionId" = gs."sessionId"
+    JOIN users u
+      ON u.user_id = p.user_id
+    LEFT JOIN "Answer" a
+      ON a."playerId" = p."playerId"
+    WHERE gs."status" = 'CLOSED'
+      AND gs."endTime" IS NOT NULL
+      AND (
+        CAST(:since AS TIMESTAMP) IS NULL
+        OR gs."endTime" >= CAST(:since AS TIMESTAMP)
+      )
+    GROUP BY
+      gs."sessionId",
+      gs."joinCode",
+      gs."startTime",
+      gs."endTime",
+      gs."questionSetId",
+      u.school_id,
+      p."playerId",
+      p.nickname,
+      p.chakra
+    ORDER BY
+      gs."endTime" DESC,
+      p.chakra DESC,
+      p.nickname ASC;
   `; // <- replace this placeholder with your query
 
   return sequelize.query(sql, {
