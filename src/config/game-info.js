@@ -5,8 +5,8 @@ const pkg = require('../../package.json');
 module.exports = {
   slug: 'shinobi-quiz-battle',            // your group's game, lower case with hyphens, for example shelf-climb
   name: 'Shinobi Quiz Battle',            // the name players will see
-  team: 'CHANGE_ME',            // your group's name and section, for example Bookworms (3-1)
-  developer: 'CHANGE_ME',       // YOUR GitHub username: this build is yours
+  team: 'Group 2',            // your group's name and section, for example Bookworms (3-1)
+  developer: 'Jerick-md',       // YOUR GitHub username: this build is yours
   description: 'A multiplayer educational quiz game where students answer questions, collect Chakra, and compete for the highest Ninja Rank.',     // one sentence about how the game is played
   min_players: 2,               // change to the limits your game is designed for
   max_players: 50,
