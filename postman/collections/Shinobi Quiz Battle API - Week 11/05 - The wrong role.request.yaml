@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/question-sets"
+method: GET
+headers:
+  - key: X-Demo-User
+    value: "{{player}}"
+order: 5000

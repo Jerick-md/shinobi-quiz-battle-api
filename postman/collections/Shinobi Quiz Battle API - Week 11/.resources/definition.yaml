@@ -1,0 +1,15 @@
+
+$kind: collection
+name: Shinobi Quiz Battle API - Week 11
+variables:
+  - key: baseUrl
+    value: "http://localhost:3001/api/v1"
+  - key: host
+    value: "24179333"
+  - key: otherHost
+    value: "24179712"
+  - key: player
+    value: "24179723"
+  - key: setId
+    value: "2"
+

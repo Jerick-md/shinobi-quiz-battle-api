@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/question-sets/abc"
+method: GET
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
+order: 9000
