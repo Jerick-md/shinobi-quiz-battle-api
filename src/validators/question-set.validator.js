@@ -11,6 +11,7 @@ const validateQuestionSetId = [
     .withMessage('Question set ID must be a positive integer.'),
 ];
 
+
 // Validate data when creating a question set
 const validateCreateQuestionSet = [
   body('questionSetId')
@@ -21,20 +22,22 @@ const validateCreateQuestionSet = [
     .withMessage('Question set ID must be a positive integer.'),
 
   body('title')
-    .trim()
-    .notEmpty()
-    .withMessage('Title is required.')
-    .bail()
-    .isLength({ max: 100 })
-    .withMessage('Title must not exceed 100 characters.'),
+  .isString().withMessage('Title must be a string.')
+  .bail()
+  .trim()
+  .notEmpty().withMessage('Title is required.')
+  .bail()
+  .isLength({ min: 5, max: 100 })
+  .withMessage('Title must be between 5 and 100 characters.'),
 
-  body('subject')
-    .trim()
-    .notEmpty()
-    .withMessage('Subject is required.')
-    .bail()
-    .isLength({ max: 100 })
-    .withMessage('Subject must not exceed 100 characters.'),
+body('subject')
+  .isString().withMessage('Subject must be a string.')
+  .bail()
+  .trim()
+  .notEmpty().withMessage('Subject is required.')
+  .bail()
+  .isLength({ max: 100 })
+  .withMessage('Subject must not exceed 100 characters.'),
 
   body('hostId')
     .not()
@@ -44,6 +47,18 @@ const validateCreateQuestionSet = [
 
 // Validate data when updating a question set
 const validateUpdateQuestionSet = [
+  body().custom((value) => {
+    if (
+      !value ||
+      typeof value !== 'object' ||
+      Array.isArray(value) ||
+      (!Object.hasOwn(value, 'title') && !Object.hasOwn(value, 'subject'))
+    ) {
+      throw new Error('At least one field (title or subject) must be provided.');
+    }
+
+    return true;
+  }),
   body('questionSetId')
     .not()
     .exists()
@@ -79,7 +94,7 @@ function checkValidation(req, res, next) {
 
   if (!errors.isEmpty()) {
     throw badRequest(
-      'VALIDATION_ERROR',
+      'VALIDATION_FAILED',
       'Please check the submitted data.',
       errors.array()
     );

@@ -29,8 +29,12 @@ async function getQuestionSetById(id, user) {
 
   const questionSet = await questionSetRepository.findById(id);
 
-  if (!questionSet || questionSet.hostId !== user.user_id) {
-    throw notFound('QUESTION_SET_NOT_FOUND', 'Question set not found.');
+  if (!questionSet) {
+  throw notFound('QUESTION_SET_NOT_FOUND', 'Question set not found.');
+  }
+
+  if (questionSet.hostId !== user.user_id) {
+    throw forbidden('You do not own this question set.');
   }
 
   return questionSet;
