@@ -2,4 +2,6 @@ workspace:
   id: f2a1e7c5-374f-4a19-86f2-f9140e01b23b
 cloudResources:
   collections:
-    ../postman/collections/Shinobi Quiz Battle API - Week 11: 58936481-7d6fae00-5dde-4641-9b6c-19ef5ebc6945
+    ../postman/collections/Shinobi Quiz Battle API - Week 11: 58936481-f3685eb6-31de-439e-8060-dec5a7d1d8c6
+  globals:
+    ../postman/globals/workspace.globals.yaml: f3a87690-ec6d-45aa-8494-9a80dc1c390b

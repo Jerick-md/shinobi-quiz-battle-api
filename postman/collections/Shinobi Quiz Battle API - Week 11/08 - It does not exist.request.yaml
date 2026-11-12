@@ -1,4 +1,7 @@
 $kind: http-request
-url: ""
+url: "{{baseUrl}}/question-sets/999"
 method: GET
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
 order: 8000

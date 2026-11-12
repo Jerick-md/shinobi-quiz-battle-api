@@ -1,4 +1,15 @@
 $kind: http-request
-url: ""
-method: GET
+url: "{{baseUrl}}/question-sets"
+method: POST
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
+body:
+  type: text
+  content: |
+    {
+      "questionSetId": 5,
+      "title": "Broken JSON",
+      "subject": "Naruto"
+    }
 order: 3000

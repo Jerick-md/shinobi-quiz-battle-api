@@ -1,4 +1,4 @@
 $kind: http-request
-url: ""
+url: "{{baseUrl}}/question-sets"
 method: GET
 order: 4000

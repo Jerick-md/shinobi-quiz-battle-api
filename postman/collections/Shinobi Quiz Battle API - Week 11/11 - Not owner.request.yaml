@@ -1,4 +1,13 @@
 $kind: http-request
-url: ""
-method: GET
+url: "{{baseUrl}}/question-sets/{{setId}}"
+method: PATCH
+headers:
+  - key: X-Demo-User
+    value: "{{otherHost}}"
+body:
+  type: json
+  content: |
+    {
+      "title": "Unauthorized Update"
+    }
 order: 11000

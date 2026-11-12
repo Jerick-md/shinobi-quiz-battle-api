@@ -1,4 +1,7 @@
 $kind: http-request
-url: ""
-method: GET
+url: "{{baseUrl}}/question-sets/{{setId}}"
+method: DELETE
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
 order: 13000

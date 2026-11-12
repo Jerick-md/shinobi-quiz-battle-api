@@ -1,4 +1,13 @@
 $kind: http-request
-url: ""
-method: GET
+url: "{{baseUrl}}/question-sets/{{setId}}"
+method: PATCH
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
+body:
+  type: json
+  content: |
+    {
+      "title": "Naruto Shinobi Quiz Updated"
+    }
 order: 10000

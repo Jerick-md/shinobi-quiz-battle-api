@@ -1,5 +1,15 @@
 $kind: http-request
-url: ""
-method: GET
-examples: .resources/02 - A field is wrong.resources/examples
+url: "{{baseUrl}}/question-sets"
+method: POST
+headers:
+  - key: X-Demo-User
+    value: "{{host}}"
+body:
+  type: json
+  content: |
+    {
+      "questionSetId": 4,
+      "title": "ABC",
+      "subject": 123
+    }
 order: 2000
