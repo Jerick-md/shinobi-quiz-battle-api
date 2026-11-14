@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions/999999
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"A code that no game uses - 404\", function () {\r
+
+      \    pm.response.to.have.status(404);\r
+
+      });"
+    language: text/javascript
+order: 5000

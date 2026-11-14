@@ -1,0 +1,18 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions/{{code}}
+method: PATCH
+headers:
+  X-Demo-User: "24179712"
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r\n    \"status\": \"ACTIVE\"\r\n}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"The host starts the game - 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 10000

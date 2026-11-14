@@ -4,7 +4,7 @@ Backend API for ** Shinobi Quiz Battle **, a tournament game for the SorSU Bulan
 CS 313 Software Engineering 1, A.Y. 2026-2027.
 
 - Developer: Jerick T.  Comedia (Jerick-md), BSCS 3-1
-- Group and game concept: [Group name]
+- Group and game concept: Group 2
 
 This is my own build of my group's game concept. Every commit in this repository was made by me, with Git, on my own computer or in my own Codespace.
 
@@ -48,23 +48,54 @@ npm run dev
 | DB_PASSWORD | (your own) | Database password. Never commit this. |
 | HUB_API_KEY | dev-hub-key | Key the Library Game Hub sends to read results. The library gives the real one at deployment. |
 
-## Endpoints (Hub Contract v1.2)
+## Endpoints
 
 Base URL: `http://localhost:3001/api/v1`
 
-| Method | Path | Purpose | Success |
+### Hub Contract Endpoints
+
+| Method | URL | Who may call | Purpose |
 |---|---|---|---|
-| GET | /health | Is the API up and can it reach the database? | 200 (503 when the database is down) |
-| GET | /game-info | Slug, name, group, developer, description, player limits, version | 200 |
-| GET | /results | Finished games, every player, and the top 3. Needs the `X-Hub-Key` header. Optional `?since=` | 200 (401 without the key) |
+| GET | `/health` | Public | Check API and database status |
+| GET | `/game-info` | Public | Get game information |
+| GET | `/results` | Library Game Hub (`X-Hub-Key` required) | Get finished games and player results |
+
+### Module 1 — Question Sets
+
+| Method | URL | Who may call | Purpose |
+|---|---|---|---|
+| GET | `/question-sets` | HOST | List question sets |
+| POST | `/question-sets` | HOST | Create a question set |
+| GET | `/question-sets/:id` | HOST | Get one question set |
+| PATCH | `/question-sets/:id` | HOST | Update a question set |
+| DELETE | `/question-sets/:id` | HOST | Delete a question set |
+
+### Module 2 — Sessions and Joining
+
+| Method | URL | Who may call | Purpose |
+|---|---|---|---|
+| POST | `/sessions` | HOST | Create a game session |
+| GET | `/sessions/:code` | Public | Read a game session using its join code |
+| GET | `/sessions/:code/players` | Public | List players in a game session |
+| POST | `/sessions/:code/players` | Authenticated user | Join or rejoin a game session |
+| PATCH | `/sessions/:code` | HOST | Change the game session status |
+
+**Note:** `:id` is the question set ID. `:code` is the six-digit game session join code. `X-Demo-User` is used for demo user identification during development.
 
 ## What "completed" means in my game
 
-[One or two sentences: when does a player count as having completed a game? For example: "A player completed the game when they answered every question, even if some answers were wrong or timed out."]
+A player is considered to have completed the game after answering every question in the session, whether their answers are right or wrong. Players who leave the game or fail to answer all questions are marked as incomplete.
 
 ## Tables
 
-[List your tables, one line each, in the order of your migrations.]
+1.users
+2.QuestionSet
+3.GameSession
+4.Player
+5.Question
+6.Answer
+7.RewardRound
+8.RewardObject
 
 ## Database scripts
 
