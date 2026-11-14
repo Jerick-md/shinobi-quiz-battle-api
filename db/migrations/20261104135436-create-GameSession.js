@@ -27,7 +27,7 @@ module.exports = {
           model: 'QuestionSet',
           key: 'questionSetId',
         },
-        onDelete: 'CASCADE',
+        onDelete: 'RESTRICT',
         onUpdate: 'CASCADE',
       },
       joinCode: {
