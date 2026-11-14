@@ -1,0 +1,36 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions
+method: POST
+headers:
+  Count-Type: application/json
+  X-Demo-User: "24179712"
+body:
+  type: json
+  content: "{\r\n  \"questionSetId\": 1\r\n}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Host can start a game - 201\", function () {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      const response = pm.response.json();\r
+
+      \r
+
+      pm.collectionVariables.set(\"code\", response.joinCode);\r
+
+      \r
+
+      pm.test(\"Game code is saved\", function () {\r
+
+      \    pm.expect(pm.collectionVariables.get(\"code\")).to.be.a(\"string\");\r
+
+      \    pm.expect(pm.collectionVariables.get(\"code\")).to.match(/^[1-9][0-9]{5}$/);\r
+
+      });"
+    language: text/javascript
+order: 1000
