@@ -1,0 +1,24 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions/{{code}}/players
+method: POST
+headers:
+  X-Demo-User: "24179723"
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"nickname\": \"Sasuke\",\r
+
+    \    \"avatar\": \"sasuke\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"A player joins - 201\", function () {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });"
+    language: text/javascript
+order: 6000

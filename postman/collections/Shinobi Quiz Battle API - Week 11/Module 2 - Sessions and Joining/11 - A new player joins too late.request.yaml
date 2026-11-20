@@ -1,0 +1,24 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions/{{code}}/players
+method: POST
+headers:
+  X-Demo-User: "24179221"
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"nickname\": \"Neji\",\r
+
+    \    \"avatar\": \"neji\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"A new player joins too late - 409\", function () {\r
+
+      \    pm.response.to.have.status(409);\r
+
+      });"
+    language: text/javascript
+order: 11000

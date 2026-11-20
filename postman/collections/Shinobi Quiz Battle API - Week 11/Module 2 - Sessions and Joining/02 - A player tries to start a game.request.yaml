@@ -1,0 +1,18 @@
+$kind: http-request
+url: http://localhost:3001/api/v1/sessions
+method: POST
+headers:
+  Content-Type: application/json
+  X-Demo-User: "24179723"
+body:
+  type: json
+  content: "{\r\n  \"questionSetId\": 1\r\n}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"A player tries to start a game - 403\", function () {\r
+
+      \    pm.response.to.have.status(403);\r
+
+      });"
+    language: text/javascript
+order: 2000

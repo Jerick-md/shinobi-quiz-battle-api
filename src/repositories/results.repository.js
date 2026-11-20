@@ -57,7 +57,7 @@ async function findFinishedGamePlayers(since) {
       AND gs."endTime" IS NOT NULL
       AND (
         CAST(:since AS TIMESTAMP) IS NULL
-        OR gs."endTime" >= CAST(:since AS TIMESTAMP)
+        OR gs."endTime" > CAST(:since AS TIMESTAMP)
       )
     GROUP BY
       gs."sessionId",

@@ -11,3 +11,8 @@ Thumbs.db
 
 # logs
 *.log
+
+# Postman local files (keep only the JSON collection on GitHub)
+.postman/
+/postman/collections/
+/postman/globals/
