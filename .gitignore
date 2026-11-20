@@ -16,3 +16,7 @@ Thumbs.db
 .postman/
 /postman/collections/
 /postman/globals/
+
+coverage/
+uploads/*/*
+!uploads/*/.gitkeep

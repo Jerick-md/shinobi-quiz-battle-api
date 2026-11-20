@@ -28,11 +28,19 @@ module.exports = (sequelize, DataTypes) =>
       role: {
         type: DataTypes.STRING(20),
         allowNull: false,
-        defaultValue: 'player',
+        defaultValue: 'PLAYER',
+      },
+      password_hash: {
+        type: DataTypes.STRING(60),
+        allowNull: true,
       },
     },
     {
       tableName: 'users',
       timestamps: false,
+      // Week 12: the hash never leaves the database by accident.
+      // Only the login query asks for it, with User.scope('withPassword').
+      defaultScope: { attributes: { exclude: ['password_hash'] } },
+      scopes: { withPassword: { attributes: { include: ['password_hash'] } } },
     }
   );
