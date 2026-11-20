@@ -107,3 +107,14 @@ A player is considered to have completed the game after answering every question
 | npm run db:check | Counts the rows in every table |
 | npm run db:reset | Empties the database, rebuilds every table and reloads the seed data |
 | npm run check | Runs the same automatic check that GitHub runs after every push |
+
+## Demo accounts
+
+All demo accounts share one password: `Shinobi2026Demo`
+
+| School ID | Name | Role |
+|---|---|---|
+| 24179444 | Tsunade | ADMIN |
+| 24179712 | Itachi Uchiha | HOST |
+| 24179333 | Jiraiya | HOST |
+| 24179723 | Shikamaru Nara | PLAYER |
