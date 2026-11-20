@@ -17,10 +17,11 @@ function toJson(user) {
 }
 
 // "data" must come from matchedData(req), so a "role" in the body never gets here.
+// "data" must come from matchedData(req), so a "role" in the body never gets here.
 async function register({ school_id, full_name, email, password: plain }) {
   const existing = await userRepository.findBySchoolId(school_id);
   if (existing) {
-    throw conflict('SCHOOL_ID_TAKEN', 'That school ID is already registered.');
+    throw conflict('SCHOOL_ID_ALREADY_EXISTS', 'This school ID is already registered.');
   }
 
   try {
@@ -38,9 +39,9 @@ async function register({ school_id, full_name, email, password: plain }) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       const fields = (err.errors || []).map((e) => e.path);
       if (fields.includes('email')) {
-        throw conflict('EMAIL_TAKEN', 'That email is already registered.');
+        throw conflict('EMAIL_ALREADY_EXISTS', 'This email address is already registered.');
       }
-      throw conflict('SCHOOL_ID_TAKEN', 'That school ID is already registered.');
+      throw conflict('SCHOOL_ID_ALREADY_EXISTS', 'This school ID is already registered.');
     }
     throw err;
   }
