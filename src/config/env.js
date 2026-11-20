@@ -24,8 +24,11 @@ module.exports = {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: Number(process.env.PORT) || 3001,
   hubApiKey: process.env.HUB_API_KEY,
-  jwtSecret: process.env.JWT_SECRET,
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN || '1h',
+  bcryptRounds: Number(process.env.BCRYPT_ROUNDS) || 10,
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiresIn: process.env.JWT_EXPIRES_IN || '1h',
+  },
   corsOrigins: process.env.CORS_ORIGINS.split(',').map((o) => o.trim()),
   db: {
     host: process.env.DB_HOST,
